@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd \\\"E:/code_cyanbukkit/ccnext\\\" && go build ./... 2>&1\",\"description\":\"Verify Go build with xterm.js mode\"}",
+  "error": "Exit code 1\n# ccnext\n.\\app.go:8:2: \"strings\" imported and not used",
+  "timestamp": "2026-07-08T13:29:02.493Z",
+  "retry_count": 1
+}
