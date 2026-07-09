@@ -10,9 +10,10 @@
   const tabs = ['terminal', 'log'] as const;
   const tabLabels: Record<string, string> = { terminal: 'Terminal', log: 'Log' };
 
-  const modes = ['normal', 'plan', 'explore', 'ask', 'build'];
+  const modes = ['normal', 'plan', 'explore', 'ask', 'build', 'hack'];
   const modeLabels: Record<string, string> = {
     normal: 'Normal', plan: 'Plan', explore: 'Explore', ask: 'Ask', build: 'Build',
+    hack: 'Hack',
   };
 
   const statusClasses: Record<string, string> = {
