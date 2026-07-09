@@ -94,6 +94,7 @@
   }
   .mode-select:focus { border-color: var(--accent); }
   .mode-select option { background-color: var(--bg-secondary); color: var(--text-primary); }
-  .text-button { font-size: 0.7rem; padding: 1px 6px; }
+  .text-button { font-size: 0.7rem; padding: 1px 6px; border-radius: var(--radius-sm); }
+  .text-button.default-mode { background-color: rgba(74, 108, 247, 0.10); border: 1px solid rgba(74, 108, 247, 0.25); }
   .text-button.active { color: var(--accent); background-color: rgba(74, 108, 247, 0.12); }
 </style>
