@@ -28,7 +28,7 @@
   function handleRestart() { dispatch('restart'); }
   function handleToggleMode() { dispatch('toggleMode'); }
   function handleTabClick(tab: string) { dispatch('tabChange', tab); }
-  function handleModeChange(e: Event) { dispatch('modeChange', (e.target as HTMLSelectElement).value); }
+  function handleModeClick(mode: string) { dispatch('modeChange', mode); }
 </script>
 
 <div class="status-bar">
@@ -41,11 +41,10 @@
   </div>
   <div class="status-right">
     <span class="status-dot {dotClass}"></span>
-    <select class="mode-select" value={activeMode} on:change={handleModeChange}>
-      {#each modes as m}
-        <option value={m}>{modeLabels[m]}</option>
-      {/each}
-    </select>
+    {#each modes as m}
+      <button class="mode-btn" class:active={activeMode === m}
+              on:click={() => handleModeClick(m)}>{modeLabels[m]}</button>
+    {/each}
     <button class="text-button" class:active={isCustomProviderMode}
             on:click={handleToggleMode}>{isCustomProviderMode ? 'Custom' : 'Default'}</button>
     {#if showRestart}
@@ -82,19 +81,22 @@
     border-color: var(--border);
     border-bottom-color: #0f0f1a;
   }
-  .mode-select {
-    background-color: rgba(74, 108, 247, 0.10);
-    border: 1px solid rgba(74, 108, 247, 0.25);
-    border-radius: var(--radius-sm);
-    padding: 1px 5px;
-    color: var(--text-primary);
+  .mode-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
     font-family: inherit;
     font-size: 0.68rem;
-    outline: none;
+    padding: 1px 5px;
     cursor: pointer;
+    transition: all var(--transition-fast);
   }
-  .mode-select:focus { border-color: var(--accent); }
-  .mode-select option { background-color: var(--bg-secondary); color: var(--text-primary); }
+  .mode-btn:hover { color: var(--text-primary); }
+  .mode-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
   .text-button { font-size: 0.7rem; padding: 1px 6px; border-radius: var(--radius-sm); }
   .text-button.default-mode { background-color: rgba(74, 108, 247, 0.10); border: 1px solid rgba(74, 108, 247, 0.25); }
   .text-button.active { color: var(--accent); background-color: rgba(74, 108, 247, 0.12); }
