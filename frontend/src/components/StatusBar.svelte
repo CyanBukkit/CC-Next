@@ -43,7 +43,7 @@
   <div class="status-right">
     <span class="status-dot {dotClass}"></span>
     {#each modes as m}
-      <button class="mode-btn" class:active={activeMode === m}
+      <button class="mode-btn" class:active={activeMode === m} class:glow={m === "hack"}
               on:click={() => handleModeClick(m)}>{modeLabels[m]}</button>
     {/each}
     <button class="text-button" class:active={isCustomProviderMode}
@@ -116,6 +116,11 @@
     color: var(--accent);
     border-bottom-color: var(--accent);
   }
+  .mode-btn.glow {
+    color: #c084fc;
+    text-shadow: 0 0 8px rgba(168, 85, 247, 0.6);
+  }
+  .mode-btn.glow:hover { text-shadow: 0 0 14px rgba(168, 85, 247, 0.8); }
   .text-button { font-size: 0.7rem; padding: 1px 6px; border-radius: var(--radius-sm); }
   .text-button.default-mode { background-color: rgba(74, 108, 247, 0.10); border: 1px solid rgba(74, 108, 247, 0.25); }
   .text-button.active { color: var(--accent); background-color: rgba(74, 108, 247, 0.12); }
