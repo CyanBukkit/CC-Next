@@ -9,7 +9,9 @@ export namespace config {
 	    dark_mode: boolean;
 	    max_history_messages: number;
 	    passphrase_template: string;
+	    active_mode: string;
 	    work_dir: string;
+	    custom_provider_mode: boolean;
 	    provider_auth_token: string;
 	    provider_base_url: string;
 	    provider_model: string;
@@ -28,7 +30,9 @@ export namespace config {
 	        this.dark_mode = source["dark_mode"];
 	        this.max_history_messages = source["max_history_messages"];
 	        this.passphrase_template = source["passphrase_template"];
+	        this.active_mode = source["active_mode"];
 	        this.work_dir = source["work_dir"];
+	        this.custom_provider_mode = source["custom_provider_mode"];
 	        this.provider_auth_token = source["provider_auth_token"];
 	        this.provider_base_url = source["provider_base_url"];
 	        this.provider_model = source["provider_model"];

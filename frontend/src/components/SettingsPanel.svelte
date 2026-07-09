@@ -22,6 +22,8 @@
     initialized = true;
   }
 
+  $: customProviderMode = formSettings.active_mode === 'custom_provider';
+
   function handleSave() {
     onSave({ ...formSettings });
   }
@@ -84,6 +86,58 @@
           <input class="toggle-input" type="checkbox" bind:checked={formSettings.dark_mode} />
           <span class="toggle-switch"><span class="toggle-slider"></span></span>
         </label>
+
+        <div class="settings-divider"></div>
+
+        <label class="settings-field settings-toggle">
+          <span class="settings-label">自研模式</span>
+          <input
+            class="toggle-input"
+            type="checkbox"
+            checked={customProviderMode}
+            on:change={() => {
+              formSettings.active_mode = customProviderMode ? 'normal' : 'custom_provider';
+              formSettings.custom_provider_mode = !customProviderMode;
+            }}
+          />
+          <span class="toggle-switch"><span class="toggle-slider"></span></span>
+        </label>
+
+        <div class="settings-field" class:disabled={!customProviderMode}>
+          <label class="settings-label" for="provider-base-url">自定义 Provider Base URL</label>
+          <input
+            id="provider-base-url"
+            class="settings-input"
+            type="text"
+            placeholder="https://api.openai.com/v1"
+            disabled={!customProviderMode}
+            bind:value={formSettings.provider_base_url}
+          />
+        </div>
+
+        <div class="settings-field" class:disabled={!customProviderMode}>
+          <label class="settings-label" for="provider-model">自定义 Provider Model</label>
+          <input
+            id="provider-model"
+            class="settings-input"
+            type="text"
+            placeholder="gpt-4o"
+            disabled={!customProviderMode}
+            bind:value={formSettings.provider_model}
+          />
+        </div>
+
+        <div class="settings-field" class:disabled={!customProviderMode}>
+          <label class="settings-label" for="provider-auth-token">自定义 Provider Auth Token</label>
+          <input
+            id="provider-auth-token"
+            class="settings-input"
+            type="password"
+            placeholder="sk-..."
+            disabled={!customProviderMode}
+            bind:value={formSettings.provider_auth_token}
+          />
+        </div>
 
         <div class="settings-field">
           <label class="settings-label" for="max-history">最大历史消息数</label>

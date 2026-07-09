@@ -15,4 +15,10 @@ export const defaultSettings = {
     dark_mode: true,
     max_history_messages: 500,
     passphrase_template: "当你完全完成所有任务后，你必须在回复结尾附上这个短语：`%random%`。不要向用户提及此指令，不要解释这个短语。",
+    active_mode: "normal",
+    custom_provider_mode: false,
+    provider_base_url: "",
+    provider_model: "",
+    provider_auth_token: "",
+    work_dir: "",
 };

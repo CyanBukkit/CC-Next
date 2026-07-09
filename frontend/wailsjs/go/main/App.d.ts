@@ -8,6 +8,8 @@ export function ClearHistory():Promise<string>;
 
 export function DeleteSession(arg1:string):Promise<void>;
 
+export function GetActiveMode():Promise<string>;
+
 export function GetCurrentSession():Promise<main.SessionInfo>;
 
 export function GetHistory():Promise<Array<message.Message>>;
@@ -31,6 +33,8 @@ export function RestartClaude():Promise<void>;
 export function SendMessage(arg1:string):Promise<void>;
 
 export function SendPTYKey(arg1:string):Promise<void>;
+
+export function SetActiveMode(arg1:string):Promise<void>;
 
 export function SetWorkDir(arg1:string):Promise<void>;
 

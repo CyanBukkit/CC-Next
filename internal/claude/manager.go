@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"regexp"
 	"sync"
+	"strings"
 	"time"
 
 	"github.com/UserExistsError/conpty"
@@ -21,11 +22,22 @@ type Manager struct {
 	lastRows int
 	running  bool
 	mu       sync.Mutex
+
+	customProviderMode bool
+	providerBaseURL    string
+	providerAuthToken  string
+	providerModel      string
 }
 
 // NewManager creates a Manager.
-func NewManager(workDir string) *Manager {
-	return &Manager{workDir: workDir}
+func NewManager(workDir string, customProviderMode bool, providerBaseURL, providerAuthToken, providerModel string) *Manager {
+	return &Manager{
+		workDir:            workDir,
+		customProviderMode: customProviderMode,
+		providerBaseURL:    providerBaseURL,
+		providerAuthToken:  providerAuthToken,
+		providerModel:      providerModel,
+	}
 }
 
 // Start launches claude in the configured working directory.
@@ -45,7 +57,7 @@ func (m *Manager) Start() error {
 		os.Chdir(m.workDir)
 	}
 
-	c, err := conpty.Start("claude")
+	c, err := conpty.Start("claude", conpty.ConPtyEnv(m.buildEnv()))
 
 	// Restore CCNext's working directory
 	if prevDir != "" {
@@ -155,6 +167,51 @@ func (m *Manager) Resize(cols, rows int) error {
 func CheckAvailability() bool {
 	_, err := exec.LookPath("claude")
 	return err == nil
+}
+
+// buildEnv returns the environment variables for the Claude process.
+// When custom provider mode is enabled, it injects the provider configuration.
+func (m *Manager) buildEnv() []string {
+	env := os.Environ()
+
+	if !m.customProviderMode {
+		// Ensure no leftover custom provider variables leak into the child process.
+		return filterEnv(env, []string{
+			"ANTHROPIC_BASE_URL",
+			"ANTHROPIC_API_KEY",
+			"ANTHROPIC_MODEL",
+		})
+	}
+
+	if m.providerBaseURL != "" {
+		env = append(env, fmt.Sprintf("ANTHROPIC_BASE_URL=%s", m.providerBaseURL))
+	}
+	if m.providerAuthToken != "" {
+		env = append(env, fmt.Sprintf("ANTHROPIC_API_KEY=%s", m.providerAuthToken))
+	}
+	if m.providerModel != "" {
+		env = append(env, fmt.Sprintf("ANTHROPIC_MODEL=%s", m.providerModel))
+	}
+	return env
+}
+
+// filterEnv returns a copy of env with the given keys removed.
+func filterEnv(env []string, keys []string) []string {
+	keySet := make(map[string]struct{}, len(keys))
+	for _, k := range keys {
+		keySet[k] = struct{}{}
+	}
+	out := make([]string, 0, len(env))
+nextVar:
+	for _, e := range env {
+		for k := range keySet {
+			if strings.HasPrefix(e, k+"=") {
+				continue nextVar
+			}
+		}
+		out = append(out, e)
+	}
+	return out
 }
 
 // ---------------------------------------------------------------------------

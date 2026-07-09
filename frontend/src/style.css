@@ -798,6 +798,22 @@ body.light .icon-button:hover:not(:disabled) {
   background-color: rgba(0, 0, 0, 0.06);
 }
 
+.text-button {
+  background: transparent;
+  border: none;
+  color: var(--accent-light);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.text-button:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
 body.light .text-button:hover {
   background-color: rgba(0, 0, 0, 0.06);
 }
@@ -827,31 +843,22 @@ kbd {
   vertical-align: 0.1em;
 }
 
-/* Utility */
-.sr-only {
-  position: absolute;
-  width: 1px;
+.text-button.active {
+  color: var(--accent);
+  background-color: rgba(74, 108, 247, 0.12);
+}
+
+body.light .text-button.active {
+  background-color: rgba(74, 108, 247, 0.1);
+}
+
+.settings-divider {
   height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  background-color: var(--border);
+  margin: 0.25rem 0;
 }
 
-.text-button {
-  background: transparent;
-  border: none;
-  color: var(--accent-light);
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.85rem;
-  padding: 0.3rem 0.5rem;
-  border-radius: var(--radius-sm);
-  transition: background-color var(--transition-fast);
-}
-
-.text-button:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+.settings-field.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }

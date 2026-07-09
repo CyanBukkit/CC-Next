@@ -10,14 +10,20 @@ type Settings struct {
 	DarkMode              bool   `json:"dark_mode"`
 	MaxHistoryMessages    int    `json:"max_history_messages"`
 	PassphraseTemplate    string `json:"passphrase_template"`
+	ActiveMode string `json:"active_mode"`
 
 	// Working directory for Claude
 	WorkDir string `json:"work_dir"`
 
-	// Provider config (kept for future use)
+	// CustomProviderMode enables the self-hosted / custom API provider mode.
+	CustomProviderMode bool `json:"custom_provider_mode"`
+
+	// ProviderAuthToken is the API token used for the custom provider.
 	ProviderAuthToken string `json:"provider_auth_token"`
-	ProviderBaseURL   string `json:"provider_base_url"`
-	ProviderModel     string `json:"provider_model"`
+	// ProviderBaseURL is the custom provider API base URL.
+	ProviderBaseURL string `json:"provider_base_url"`
+	// ProviderModel is the custom provider model name.
+	ProviderModel string `json:"provider_model"`
 }
 
 // DefaultPassphraseTemplate is the default hidden instruction.
@@ -35,5 +41,10 @@ func DefaultSettings() Settings {
 		DarkMode:              true,
 		MaxHistoryMessages:    500,
 		PassphraseTemplate:    DefaultPassphraseTemplate,
+		CustomProviderMode:    false,
+		ActiveMode:            "normal",
+		ProviderAuthToken:     "",
+		ProviderBaseURL:       "",
+		ProviderModel:         "",
 	}
 }

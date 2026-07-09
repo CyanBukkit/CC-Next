@@ -94,7 +94,13 @@ func (a *App) startup(ctx context.Context) {
 	}
 
 	// Start PTY session in configured working directory
-	a.claude = claude.NewManager(settings.WorkDir)
+	a.claude = claude.NewManager(
+		settings.WorkDir,
+		settings.CustomProviderMode,
+		settings.ProviderBaseURL,
+		settings.ProviderAuthToken,
+		settings.ProviderModel,
+	)
 	if err := a.claude.Start(); err != nil {
 		log.Printf("PTY start failed: %v — falling back to echo mode", err)
 		a.claude = nil
@@ -234,6 +240,16 @@ func (a *App) GetSettings() config.Settings {
 
 // UpdateSettings updates and persists settings.
 func (a *App) UpdateSettings(s config.Settings) error {
+	// Keep active_mode and custom_provider_mode in sync.
+	if s.ActiveMode == "custom_provider" {
+		s.CustomProviderMode = true
+	} else {
+		s.CustomProviderMode = false
+		if s.ActiveMode == "" {
+			s.ActiveMode = "normal"
+		}
+	}
+
 	a.cfg = s
 
 	if a.recovery != nil {
@@ -264,6 +280,40 @@ func (a *App) GetStatus() string {
 	return "echo"
 }
 
+// GetActiveMode returns the currently selected Claude Code mode.
+func (a *App) GetActiveMode() string {
+	return a.cfg.ActiveMode
+}
+
+// SetActiveMode switches the mode and sends Shift+Tab to cycle the Claude Code TUI.
+func (a *App) SetActiveMode(mode string) error {
+	a.cfg.ActiveMode = mode
+	_ = a.cfgStore.Save(a.cfg)
+	if a.claude == nil || !a.claude.IsRunning() {
+		return nil
+	}
+	order := []string{"normal", "plan", "explore", "ask", "build"}
+	targetIdx := -1
+	for i, m := range order {
+		if m == mode {
+			targetIdx = i
+			break
+		}
+	}
+	if targetIdx < 0 {
+		return fmt.Errorf("unknown mode: %s", mode)
+	}
+	for i := 0; i < len(order); i++ {
+		a.claude.SendKey([]byte("\x1b[Z"))
+		time.Sleep(120 * time.Millisecond)
+	}
+	for i := 0; i < targetIdx; i++ {
+		a.claude.SendKey([]byte("\x1b[Z"))
+		time.Sleep(120 * time.Millisecond)
+	}
+	return nil
+}
+
 // ResizePTY resizes the PTY terminal dimensions.
 func (a *App) ResizePTY(cols, rows int) {
 	if a.claude != nil {
@@ -285,7 +335,13 @@ func (a *App) RestartClaude() error {
 		a.claude.Stop()
 	}
 
-	a.claude = claude.NewManager(a.cfg.WorkDir)
+	a.claude = claude.NewManager(
+		a.cfg.WorkDir,
+		a.cfg.CustomProviderMode,
+		a.cfg.ProviderBaseURL,
+		a.cfg.ProviderAuthToken,
+		a.cfg.ProviderModel,
+	)
 	if err := a.claude.Start(); err != nil {
 		a.claude = nil
 		return err

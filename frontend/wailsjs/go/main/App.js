@@ -10,6 +10,10 @@ export function DeleteSession(arg1) {
   return window['go']['main']['App']['DeleteSession'](arg1);
 }
 
+export function GetActiveMode() {
+  return window['go']['main']['App']['GetActiveMode']();
+}
+
 export function GetCurrentSession() {
   return window['go']['main']['App']['GetCurrentSession']();
 }
@@ -56,6 +60,10 @@ export function SendMessage(arg1) {
 
 export function SendPTYKey(arg1) {
   return window['go']['main']['App']['SendPTYKey'](arg1);
+}
+
+export function SetActiveMode(arg1) {
+  return window['go']['main']['App']['SetActiveMode'](arg1);
 }
 
 export function SetWorkDir(arg1) {
