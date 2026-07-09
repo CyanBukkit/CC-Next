@@ -52,6 +52,8 @@
   .status-bar {
     padding-top: 0.2rem;
     padding-bottom: 0;
+    border-bottom: none;
+    background: var(--bg-secondary);
   }
   .tabs-row {
     display: flex;
@@ -60,12 +62,13 @@
   }
   .tabs-filler {
     flex: 1;
+    min-width: 12px;
     border-bottom: 1px solid var(--border);
   }
   .tab-btn {
     background: transparent;
     border: 1px solid transparent;
-    border-bottom: none;
+    border-bottom: 1px solid var(--border);
     color: var(--text-secondary);
     font-family: inherit;
     font-size: 0.72rem;
@@ -79,6 +82,7 @@
     color: var(--text-primary);
     background: #0f0f1a;
     border-color: var(--border);
+    border-bottom-color: #0f0f1a;
   }
   .text-button {
     font-size: 0.7rem;
