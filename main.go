@@ -18,10 +18,10 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:            "CCNext - Claude Assistant",
-		Width:            1100,
-		Height:           800,
-		MinWidth:         800,
-		MinHeight:        600,
+		Width:            950,
+		Height:           650,
+		MinWidth:         640,
+		MinHeight:        460,
 		Frameless:        false,
 		BackgroundColour: options.NewRGBA(26, 26, 46, 255),
 		AssetServer: &assetserver.Options{
