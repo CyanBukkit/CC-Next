@@ -15,8 +15,6 @@
     newSession,
     resizeTerminal,
     sendPTYKey,
-    getActiveMode,
-    setActiveMode,
     Keys,
     EventsOn,
     EventsOff,
@@ -226,7 +224,6 @@
   {activeMode}
   on:restart={handleRestart}
   on:toggleMode={handleToggleMode}
-  on:modeChange={handleModeChange}
 />
 <TerminalView bind:this={terminal} on:resize={handleTerminalResize} />
 <StuckBanner visible={stuckVisible} onContinue={handleContinue} onDismiss={handleDismiss} />
