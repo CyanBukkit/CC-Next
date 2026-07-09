@@ -292,7 +292,7 @@ func (a *App) SetActiveMode(mode string) error {
 	if a.claude == nil || !a.claude.IsRunning() {
 		return nil
 	}
-	order := []string{"normal", "plan", "explore", "ask", "build"}
+	order := []string{"normal", "plan", "explore", "ask", "build", "hack"}
 	targetIdx := -1
 	for i, m := range order {
 		if m == mode {
