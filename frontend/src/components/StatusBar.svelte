@@ -5,10 +5,15 @@
   export let activeMode: string = 'normal';
   export let activeTab: string = 'terminal';
 
-  const dispatch = createEventDispatcher<{ restart: void; toggleMode: void; tabChange: string }>();
+  const dispatch = createEventDispatcher<{ restart: void; toggleMode: void; tabChange: string; modeChange: string }>();
 
   const tabs = ['terminal', 'log'] as const;
   const tabLabels: Record<string, string> = { terminal: 'Terminal', log: 'Log' };
+
+  const modes = ['normal', 'plan', 'explore', 'ask', 'build'];
+  const modeLabels: Record<string, string> = {
+    normal: 'Normal', plan: 'Plan', explore: 'Explore', ask: 'Ask', build: 'Build',
+  };
 
   const statusClasses: Record<string, string> = {
     idle: 'idle', thinking: 'thinking', responding: 'responding',
@@ -22,26 +27,26 @@
   function handleRestart() { dispatch('restart'); }
   function handleToggleMode() { dispatch('toggleMode'); }
   function handleTabClick(tab: string) { dispatch('tabChange', tab); }
+  function handleModeChange(e: Event) { dispatch('modeChange', (e.target as HTMLSelectElement).value); }
 </script>
 
 <div class="status-bar">
   <div class="tabs-row">
     {#each tabs as tab}
-      <button
-        class="tab-btn"
-        class:active={activeTab === tab}
-        on:click={() => handleTabClick(tab)}
-      >{tabLabels[tab]}</button>
+      <button class="tab-btn" class:active={activeTab === tab}
+              on:click={() => handleTabClick(tab)}>{tabLabels[tab]}</button>
     {/each}
     <span class="tabs-filler"></span>
   </div>
   <div class="status-right">
     <span class="status-dot {dotClass}"></span>
-    <button
-      class="text-button"
-      class:active={isCustomProviderMode}
-      on:click={handleToggleMode}
-    >{isCustomProviderMode ? 'Custom' : 'Default'}</button>
+    <select class="mode-select" value={activeMode} on:change={handleModeChange}>
+      {#each modes as m}
+        <option value={m}>{modeLabels[m]}</option>
+      {/each}
+    </select>
+    <button class="text-button" class:active={isCustomProviderMode}
+            on:click={handleToggleMode}>{isCustomProviderMode ? 'Custom' : 'Default'}</button>
     {#if showRestart}
       <button class="text-button" on:click={handleRestart}>R</button>
     {/if}
@@ -55,16 +60,8 @@
     border-bottom: none;
     background: var(--bg-secondary);
   }
-  .tabs-row {
-    display: flex;
-    gap: 0;
-    align-self: flex-end;
-  }
-  .tabs-filler {
-    flex: 1;
-    min-width: 12px;
-    border-bottom: 1px solid var(--border);
-  }
+  .tabs-row { display: flex; gap: 0; align-self: flex-end; }
+  .tabs-filler { flex: 1; min-width: 12px; border-bottom: 1px solid var(--border); }
   .tab-btn {
     background: transparent;
     border: 1px solid transparent;
@@ -84,12 +81,19 @@
     border-color: var(--border);
     border-bottom-color: #0f0f1a;
   }
-  .text-button {
-    font-size: 0.7rem;
-    padding: 1px 6px;
+  .mode-select {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1px 4px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.68rem;
+    outline: none;
+    cursor: pointer;
   }
-  .text-button.active {
-    color: var(--accent);
-    background-color: rgba(74, 108, 247, 0.12);
-  }
+  .mode-select:focus { border-color: var(--accent); }
+  .mode-select option { background-color: var(--bg-secondary); color: var(--text-primary); }
+  .text-button { font-size: 0.7rem; padding: 1px 6px; }
+  .text-button.active { color: var(--accent); background-color: rgba(74, 108, 247, 0.12); }
 </style>

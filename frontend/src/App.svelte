@@ -172,7 +172,8 @@
 <StatusBar {status} {activeMode} {activeTab}
   on:restart={handleRestart}
   on:toggleMode={handleToggleMode}
-  on:tabChange={handleTabChange} />
+  on:tabChange={handleTabChange}
+  on:modeChange={handleModeChange} />
 {#if activeTab === 'terminal'}
   <TerminalView bind:this={terminal} on:resize={handleTerminalResize} />
 {:else}
