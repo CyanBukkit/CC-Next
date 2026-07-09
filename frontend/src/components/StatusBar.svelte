@@ -37,6 +37,7 @@
       <button class="tab-btn" class:active={activeTab === tab}
               on:click={() => handleTabClick(tab)}>{tabLabels[tab]}</button>
     {/each}
+    <button class="hack-btn" on:click={() => handleModeClick("hack")}>HACK</button>
     <span class="tabs-filler"></span>
   </div>
   <div class="status-right">
@@ -80,6 +81,24 @@
     background: #0f0f1a;
     border-color: var(--border);
     border-bottom-color: #0f0f1a;
+  }
+  .hack-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #7c3aed;
+    color: #a855f7;
+    font-family: inherit;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-shadow: 0 0 6px rgba(168, 85, 247, 0.4);
+    transition: all var(--transition-fast);
+  }
+  .hack-btn:hover {
+    color: #c084fc;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
   }
   .mode-btn {
     background: transparent;
