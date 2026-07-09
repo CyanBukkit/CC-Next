@@ -13,7 +13,7 @@
 
   onMount(() => {
     term = new Terminal({
-      fontSize: 13,
+      fontSize: 12,
       fontFamily: '"Cascadia Code", "Fira Code", "JetBrains Mono", Consolas, "Noto Sans Mono", monospace',
       theme: {
         background: '#0f0f1a',

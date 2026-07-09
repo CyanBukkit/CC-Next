@@ -35,7 +35,7 @@
   <!-- Shortcut keys row -->
   <div class="shortcut-bar">
     <button class="shortcut-btn" title="返回 (ESC)" on:click={() => sendPTYKey(Keys.esc)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="11 7 6 12 11 17"/>
         <polyline points="6 12 18 12"/>
       </svg>
@@ -43,21 +43,21 @@
     </button>
     <div class="shortcut-sep"></div>
     <button class="shortcut-btn" title="回车确认 (Enter)" on:click={() => sendPTYKey(Keys.enter)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="9 17 4 12 9 7"/>
         <path d="M4 12h12c2.2 0 4 1.8 4 4v4"/>
       </svg>
       <span>回车</span>
     </button>
     <button class="shortcut-btn" title="空格选中 (Space)" on:click={() => sendPTYKey(Keys.space)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <line x1="4" y1="12" x2="20" y2="12"/>
       </svg>
       <span>空格</span>
     </button>
     <div class="shortcut-sep"></div>
     <button class="shortcut-btn" title="后台运行 (Ctrl+B)" on:click={() => sendPTYKey(Keys.ctrlB)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <rect x="2" y="3" width="20" height="14" rx="2"/>
         <line x1="8" y1="21" x2="16" y2="21"/>
         <line x1="12" y1="17" x2="12" y2="21"/>
@@ -65,14 +65,14 @@
       <span>后台</span>
     </button>
     <button class="shortcut-btn" title="切换模式 (Shift+Tab)" on:click={() => sendPTYKey(Keys.shiftTab)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="7 7 3 12 7 17"/>
         <line x1="21" y1="12" x2="3" y2="12"/>
       </svg>
       <span>模式</span>
     </button>
     <button class="shortcut-btn" title="查看思考 (Ctrl+O)" on:click={() => sendPTYKey(Keys.ctrlO)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <circle cx="12" cy="12" r="10"/>
         <circle cx="12" cy="12" r="3"/>
         <line x1="12" y1="2" x2="12" y2="6"/>
@@ -83,26 +83,26 @@
       <span>思考</span>
     </button>
     <button class="shortcut-btn" title="上 (↑)" on:click={() => sendPTYKey(Keys.up)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="7 14 12 9 17 14"/>
       </svg>
       <span>上</span>
     </button>
     <button class="shortcut-btn" title="下 (↓)" on:click={() => sendPTYKey(Keys.down)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="7 10 12 15 17 10"/>
       </svg>
       <span>下</span>
     </button>
     <div class="shortcut-sep"></div>
     <button class="shortcut-btn" title="切换目录" on:click={pickWorkDir}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M2 6a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6z"/>
       </svg>
       <span>目录</span>
     </button>
     <button class="shortcut-btn" title="刷新终端 (Ctrl+L)" on:click={() => sendPTYKey(Keys.ctrlL)}>
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5">
+      <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="1 4 1 10 7 10"/>
         <path d="M3.5 16.5A9 9 0 1 0 2 12"/>
       </svg>
@@ -146,7 +146,7 @@
   .input-bar {
     width: 100%;
     box-sizing: border-box;
-    padding: 0.3rem 0.5rem 0.5rem;
+    padding: 0.2rem 0.3rem 0.3rem;
     background-color: var(--bg-secondary);
     border-top: 1px solid var(--border);
   }
@@ -154,8 +154,8 @@
   .shortcut-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem;
-    margin-bottom: 0.2rem;
+    gap: 0.15rem;
+    margin-bottom: 0.1rem;
     justify-content: center;
   }
 
@@ -170,12 +170,12 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    padding: 1px 5px;
+    padding: 0 4px;
     border-radius: 4px;
     border: 1px solid var(--border);
     background: var(--bg-tertiary);
     color: var(--text-secondary);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-family: inherit;
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -205,7 +205,7 @@
     background-color: var(--bg-input);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 0.25rem 0.5rem;
+    padding: 0.15rem 0.3rem;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   }
 
@@ -222,7 +222,7 @@
     background: transparent;
     color: var(--text-primary);
     font-family: inherit;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     line-height: 1.4;
     max-height: 100px;
     min-height: 22px;
@@ -241,7 +241,7 @@
   }
 
   .char-count {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--text-secondary);
     user-select: none;
     min-width: 20px;
