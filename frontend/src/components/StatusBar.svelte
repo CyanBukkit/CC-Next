@@ -58,18 +58,18 @@
   .tab-btn {
     background: transparent;
     border: none;
+    border-bottom: 2px solid transparent;
     color: var(--text-secondary);
     font-family: inherit;
     font-size: 0.7rem;
     padding: 1px 6px;
     cursor: pointer;
-    border-radius: 3px;
     transition: all var(--transition-fast);
   }
   .tab-btn:hover { color: var(--text-primary); }
   .tab-btn.active {
     color: var(--text-primary);
-    background: var(--bg-tertiary);
+    border-bottom-color: var(--accent);
   }
   .text-button {
     font-size: 0.7rem;
