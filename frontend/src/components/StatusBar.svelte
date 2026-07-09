@@ -82,10 +82,10 @@
     border-bottom-color: #0f0f1a;
   }
   .mode-select {
-    background-color: var(--bg-input);
-    border: 1px solid var(--border);
+    background-color: rgba(74, 108, 247, 0.10);
+    border: 1px solid rgba(74, 108, 247, 0.25);
     border-radius: var(--radius-sm);
-    padding: 1px 4px;
+    padding: 1px 5px;
     color: var(--text-primary);
     font-family: inherit;
     font-size: 0.68rem;
